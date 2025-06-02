@@ -1,4 +1,3 @@
-import Pokedex.ExperienceCurve;
 import Pokedex.Pokemon;
 
 import static Pokedex.ExperienceCurve.*;
@@ -13,7 +12,7 @@ public class PokemonGame {
             " and it's types are: " + pokemon.getType1().getTypeName() + " and " + pokemon.getType2().getTypeName() +
             "\nIt's level " + pokemon.getLevel() + " and has " + pokemon.getExperience() + " experience");
 
-        pokemon.setExperience(1);
+        pokemon.setExperience(1000);
 
         System.out.println(pokemon.getExperience() + " " + pokemon.getLevel());
     }
