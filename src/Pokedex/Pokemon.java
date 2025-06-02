@@ -72,4 +72,20 @@ public class Pokemon {
         }
         if(level == MAX_LEVEL) experience = 0;
     }
+
+    @Override
+    public String toString(){
+        return String.format("""
+                Name:       %s
+                Types:      %s, %s
+                Level:      %d
+                Experience: %d
+                """,
+                name,
+                type1.getTypeName(),
+                type2.getTypeName(),
+                level,
+                experience
+                );
+    }
 }
