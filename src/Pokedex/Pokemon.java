@@ -3,7 +3,7 @@ package Pokedex;
 public class Pokemon {
     private String name;
     private final Type type1;
-    private final Type type2;
+    private Type type2;
     private int level;
     private final int MAX_LEVEL = 100;
     private int experience;
@@ -14,6 +14,14 @@ public class Pokemon {
         this.name = name;
         this.type1 = type1;
         this.type2 = type2;
+        this.level = level;
+        this.experience = experience;
+        this.experienceCurve = experienceCurve;
+    }
+
+    public Pokemon(String name, Type type1, int level, int experience, ExperienceCurve experienceCurve){
+        this.name = name;
+        this.type1 = type1;
         this.level = level;
         this.experience = experience;
         this.experienceCurve = experienceCurve;
@@ -32,7 +40,10 @@ public class Pokemon {
     }
 
     public Type getType2(){
-        return type2;
+        if(type2 != null){
+            return type2;
+        }
+        return Type.NONE;
     }
 
     public int getLevel(){
@@ -77,13 +88,12 @@ public class Pokemon {
     public String toString(){
         return String.format("""
                 Name:       %s
-                Types:      %s, %s
+                Types:      %s
                 Level:      %d
                 Experience: %d
                 """,
                 name,
-                type1.getTypeName(),
-                type2.getTypeName(),
+                String.format("%s %s", getType1().getTypeName(), getType2().getTypeName()),
                 level,
                 experience
                 );

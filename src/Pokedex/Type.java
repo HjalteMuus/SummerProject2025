@@ -19,6 +19,7 @@ public enum Type {
     FAIRY("Fairy"),
     GHOST("Ghost"),
     STEEL("Steel"),
+    NONE(""),
     ;
 
     private final String typeName;
