@@ -1,4 +1,4 @@
-package Areas;
+package GameWorld;
 
 public class Area {
 }
