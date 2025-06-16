@@ -17,6 +17,7 @@ public class Pokemon {
         this.level = level;
         this.experience = experience;
         this.experienceCurve = experienceCurve;
+        experienceCurve.setTotalExpToNextLvl(level, experienceCurve);
     }
 
     public Pokemon(String name, Type type1, int level, int experience, ExperienceCurve experienceCurve){
@@ -59,14 +60,14 @@ public class Pokemon {
     }
 
     public void setExperience(int experienceUp){
-        if(experienceUp < 1){
+        if(experienceUp < 1 || level == MAX_LEVEL){
             return;
         }
 
         experience += experienceUp;
 
         while(true){
-            if(experience < experienceCurve.getExpCurve()*level || level == MAX_LEVEL) break;
+            if(experience < experienceCurve.getTotalExpToNextLvl() || level == MAX_LEVEL) break;
             levelUp();
         }
 
@@ -77,10 +78,11 @@ public class Pokemon {
     }
 
     private void levelUp(){
-        if(experience >= experienceCurve.getExpCurve()*level){
-            experience = experience - experienceCurve.getExpCurve()*level;
+        if(experience >= experienceCurve.getTotalExpToNextLvl()){
+            experience = experience - experienceCurve.getTotalExpToNextLvl();
             setLevel((level+1));
         }
+        experienceCurve.setTotalExpToNextLvl(level, experienceCurve);
         if(level == MAX_LEVEL) experience = 0;
     }
 
@@ -91,11 +93,13 @@ public class Pokemon {
                 Types:      %s
                 Level:      %d
                 Experience: %d
+                Exp to lvl: %d
                 """,
                 name,
                 String.format("%s %s", getType1().getTypeName(), getType2().getTypeName()),
                 level,
-                experience
+                experience,
+                experienceCurve.getTotalExpToNextLvl()-experience
                 );
     }
 }

@@ -1,24 +1,35 @@
 package Pokedex;
 
 public enum ExperienceCurve {
-    SLOW(100,"Slow"),
-    NORMAL(75,"Normal"),
-    FAST(50,"Fast"),
+    SLOW(0,"Slow"),
+    NORMAL(0,"Normal"),
+    FAST(0,"Fast"),
     ;
 
-    private final int expCurve;
+    private int totalExpToNextLvl;
     private final String name;
 
-    ExperienceCurve(int expCurve, String name){
-        this.expCurve = expCurve;
+    ExperienceCurve(int totalExpToNextLvl, String name){
+        this.totalExpToNextLvl = totalExpToNextLvl;
         this.name = name;
     }
 
-    public int getExpCurve(){
-        return expCurve;
+    public int getTotalExpToNextLvl(){
+        return totalExpToNextLvl;
     }
 
     public String getName(){
         return name;
+    }
+
+    public void setTotalExpToNextLvl(int lvl, ExperienceCurve e){
+        if(e == SLOW){
+            totalExpToNextLvl = (int)((Math.pow(lvl+1,3)*1.25)-(Math.pow(lvl,3)*1.25));
+        }else if(e == NORMAL){
+            totalExpToNextLvl = (int)(Math.pow(lvl+1,3)-Math.pow(lvl,3));
+        }else{
+            totalExpToNextLvl = (int)(Math.pow(lvl+1,3)*0.8-Math.pow(lvl,3)*0.8);
+        }
+        if (lvl == 100) totalExpToNextLvl = 0;
     }
 }
