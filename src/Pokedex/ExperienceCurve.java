@@ -1,9 +1,9 @@
 package Pokedex;
 
 public enum ExperienceCurve {
-    SLOW(8,"Slow"),
-    NORMAL(5,"Normal"),
-    FAST(3,"Fast"),
+    SLOW(0,"Slow"),
+    NORMAL(0,"Normal"),
+    FAST(0,"Fast"),
     ;
 
     private int totalExpToNextLvl;
@@ -24,11 +24,12 @@ public enum ExperienceCurve {
 
     public void setTotalExpToNextLvl(int lvl, ExperienceCurve e){
         if(e == SLOW){
-            totalExpToNextLvl = (lvl * totalExpToNextLvl) + 25;
+            totalExpToNextLvl = (int)((Math.pow(lvl,3)*1.25)-(Math.pow(lvl-1,3)*1.25));
         }else if(e == NORMAL){
-            totalExpToNextLvl = (lvl * totalExpToNextLvl) + 18;
+            totalExpToNextLvl = (int)(Math.pow(lvl,3)-Math.pow(lvl-1,3));
         }else{
-            totalExpToNextLvl = (lvl * totalExpToNextLvl) + 14;
+            totalExpToNextLvl = (int)(((4*Math.pow(lvl,3))/5)-((4*Math.pow(lvl-1,3))/5));
         }
+        if(totalExpToNextLvl == 0) totalExpToNextLvl = 1;
     }
 }
