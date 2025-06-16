@@ -49,7 +49,7 @@ public class Pokemon {
     }
 
     public void setExperience(int experienceUp){
-        if(experienceUp < 1){
+        if(experienceUp < 1 || level == MAX_LEVEL){
             return;
         }
 
