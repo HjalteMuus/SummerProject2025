@@ -85,6 +85,18 @@ public class Pokemon {
         if(level == MAX_LEVEL) experience = 0;
     }
 
+    public static Pokemon fromString(String csvFileLine){
+        String[] attributes = csvFileLine.split(";");
+        String name = attributes[0];
+        Type primaryType = Type.valueOf(attributes[1]);
+        Type secondaryType = !attributes[2].isEmpty() ? Type.valueOf(attributes[2]) : Type.NONE;
+        int level = Integer.parseInt(attributes[3]);
+        int experience = Integer.parseInt(attributes[4]);
+        ExperienceCurve ec = ExperienceCurve.valueOf(attributes[5]);
+
+        return new Pokemon(name, primaryType, secondaryType, level, experience, ec);
+    }
+
     @Override
     public String toString(){
         if(getType2() == null){

@@ -1,17 +1,16 @@
 package Pokedex;
 
 public enum ExperienceCurve {
-    SLOW(0,"Slow"),
-    MEDIUM_FAST(0,"Medium Fast"),
-    MEDIUM_SLOW(0, "Medium Slow"),
-    FAST(0,"Fast"),
+    SLOW("Slow"),
+    MEDIUM_FAST("Medium Fast"),
+    MEDIUM_SLOW( "Medium Slow"),
+    FAST("Fast"),
     ;
 
     private int totalExpToNextLvl;
     private final String name;
 
-    ExperienceCurve(int totalExpToNextLvl, String name){
-        this.totalExpToNextLvl = totalExpToNextLvl;
+    ExperienceCurve(String name){
         this.name = name;
     }
 

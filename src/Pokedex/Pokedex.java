@@ -7,16 +7,24 @@ import java.util.Scanner;
 
 public class Pokedex {
     private final ArrayList<Pokemon> playerPokedex;
-    private final ArrayList<Pokemon> notDiscoveredPokedex;
+    private final ArrayList<Pokemon> undiscoveredPokedex;
     private final String path;
 
     public Pokedex(String path){
         this.playerPokedex = new ArrayList<>();
-        this.notDiscoveredPokedex = new ArrayList<>();
+        this.undiscoveredPokedex = new ArrayList<>();
         this.path = path;
     }
 
     private void loadPlayerPokedex(String path){
+        LoadPokedex(path, playerPokedex);
+    }
+
+    private void loadUndiscoveredPokedex(String path){
+        LoadPokedex(path, undiscoveredPokedex);
+    }
+
+    private void LoadPokedex(String path, ArrayList<Pokemon> pokedex) {
         File csvFile = new File(path);
         int lineCounter = 1;
 
@@ -24,6 +32,8 @@ public class Pokedex {
             reader.nextLine();
             while(reader.hasNextLine()){
                 lineCounter++;
+                Pokemon pokemon = Pokemon.fromString(reader.nextLine());
+                pokedex.add(pokemon);
             }
         }catch (FileNotFoundException e){
             throw new RuntimeException("File not found: " + path);
@@ -31,5 +41,6 @@ public class Pokedex {
             throw new RuntimeException("Incompatible file: error at line " + lineCounter + " in file: " + csvFile.getAbsolutePath());
         }
     }
+
 
 }
