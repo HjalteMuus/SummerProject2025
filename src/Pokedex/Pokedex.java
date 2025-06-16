@@ -45,16 +45,20 @@ public class Pokedex {
         }
     }
 
-    private void savePokedex(String path, ArrayList<Pokemon> pokedex){
+    public void savePokedex(String path, ArrayList<Pokemon> pokedex){
+        String[] attributes;
+        String line;
         try (PrintWriter pw = new PrintWriter(path)){
             //add header
-            pw.println("name;type1;type2;level;experience;experienceCurve");
+            pw.println("name;type1;type2");
 
             for(Pokemon p : pokedex){
-
+                attributes = p.toStringArrayToPokedex();
+                line = String.join(";", attributes);
+                pw.println(line);
             }
         }catch (FileNotFoundException e){
-
+            throw new RuntimeException("File not found: " + path, e);
         }
     }
 }
