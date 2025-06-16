@@ -24,6 +24,10 @@ public enum ExperienceCurve {
     }
 
     public void setTotalExpToNextLvl(int lvl, ExperienceCurve e){
+        if (lvl == 100){
+            totalExpToNextLvl = 0;
+            return;
+        }
         if(e == SLOW){
             totalExpToNextLvl = (int)(Math.ceil(Math.pow(lvl+1,3)*1.25-Math.pow(lvl,3)*1.25));
         }else if(e == MEDIUM_FAST){
@@ -37,6 +41,5 @@ public enum ExperienceCurve {
             }
             totalExpToNextLvl = (int)(Math.ceil(1.2*Math.pow(lvl+1,3)-15*Math.pow(lvl+1,2)+100*(lvl+1)-140)-(1.2*Math.pow(lvl,3)-15*Math.pow(lvl,2)+100*(lvl)-140));
         }
-        if (lvl == 100) totalExpToNextLvl = 0;
     }
 }
