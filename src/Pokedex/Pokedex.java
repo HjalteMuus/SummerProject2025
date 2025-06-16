@@ -2,6 +2,7 @@ package Pokedex;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,5 +45,16 @@ public class Pokedex {
         }
     }
 
+    private void savePokedex(String path, ArrayList<Pokemon> pokedex){
+        try (PrintWriter pw = new PrintWriter(path)){
+            //add header
+            pw.println("name;type1;type2;level;experience;experienceCurve");
 
+            for(Pokemon p : pokedex){
+
+            }
+        }catch (FileNotFoundException e){
+
+        }
+    }
 }

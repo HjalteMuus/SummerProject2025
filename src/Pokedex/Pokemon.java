@@ -112,6 +112,15 @@ public class Pokemon {
         return new Pokemon(name, primaryType, secondaryType);
     }
 
+    public String[] toStringArrayToPokedex(){
+        String[] attributes = new String[3];
+        attributes[0] = name;
+        attributes[1] = getType1().getTypeName();
+        attributes[2] = !(getType2().getTypeName().isEmpty()) ? getType2().getTypeName() : "";
+
+        return attributes;
+    }
+
     @Override
     public String toString(){
         if(getType2().getTypeName().isEmpty()){
