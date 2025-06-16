@@ -26,6 +26,7 @@ public class Pokemon {
         this.level = level;
         this.experience = experience;
         this.experienceCurve = experienceCurve;
+        experienceCurve.setTotalExpToNextLvl(level, experienceCurve);
     }
 
     public String getName(){
@@ -88,6 +89,22 @@ public class Pokemon {
 
     @Override
     public String toString(){
+        if(getType2() == null){
+            return String.format("""
+                Name:       %s
+                Types:      %s
+                Level:      %d
+                Experience: %d
+                Exp to lvl: %d
+                """,
+                    name,
+                    getType1().getTypeName(),
+                    level,
+                    experience,
+                    experienceCurve.getTotalExpToNextLvl()-experience
+            );
+        }
+
         return String.format("""
                 Name:       %s
                 Types:      %s
