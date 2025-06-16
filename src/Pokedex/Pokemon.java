@@ -82,12 +82,14 @@ public class Pokemon {
                 Types:      %s, %s
                 Level:      %d
                 Experience: %d
+                Exp to lvl: %d
                 """,
                 name,
                 type1.getTypeName(),
                 type2.getTypeName(),
                 level,
-                experience
+                experience,
+                experienceCurve.getTotalExpToNextLvl()-experience
                 );
     }
 }

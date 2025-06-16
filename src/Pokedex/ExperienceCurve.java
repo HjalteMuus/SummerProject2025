@@ -30,6 +30,6 @@ public enum ExperienceCurve {
         }else{
             totalExpToNextLvl = (int)(Math.pow(lvl,3)*0.8-Math.pow(lvl-1,3)*0.8);
         }
-        if(totalExpToNextLvl == 0) totalExpToNextLvl = 7;
+        if(totalExpToNextLvl <= 7) totalExpToNextLvl = 7;
     }
 }
