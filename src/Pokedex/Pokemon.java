@@ -7,8 +7,7 @@ public class Pokemon {
     private int level;
     private final int MAX_LEVEL = 100;
     private int experience;
-    private final ExperienceCurve experienceCurve;
-
+    private ExperienceCurve experienceCurve;
 
     public Pokemon(String name, Type type1, Type type2, int level, int experience, ExperienceCurve experienceCurve){
         this.name = name;
@@ -27,6 +26,13 @@ public class Pokemon {
         this.experience = experience;
         this.experienceCurve = experienceCurve;
         experienceCurve.setTotalExpToNextLvl(level, experienceCurve);
+    }
+    
+    //Pokemon as seen in the pokedex
+    public Pokemon(String name, Type type1, Type type2){
+        this.name = name;
+        this.type1 = type1;
+        this.type2 = type2;
     }
 
     public String getName(){
@@ -85,7 +91,7 @@ public class Pokemon {
         if(level == MAX_LEVEL) experience = 0;
     }
 
-    public static Pokemon fromString(String csvFileLine){
+    public static Pokemon fromStringToParty(String csvFileLine){
         String[] attributes = csvFileLine.split(";");
         String name = attributes[0];
         Type primaryType = Type.valueOf(attributes[1]);
@@ -96,10 +102,19 @@ public class Pokemon {
 
         return new Pokemon(name, primaryType, secondaryType, level, experience, ec);
     }
+    
+    public static Pokemon fromStringToPokedex(String csvFileLine){
+        String[] attributes = csvFileLine.split(";");
+        String name = attributes[0];
+        Type primaryType = Type.valueOf(attributes[1]);
+        Type secondaryType = !attributes[2].isEmpty() ? Type.valueOf(attributes[2]) : Type.NONE;
+
+        return new Pokemon(name, primaryType, secondaryType);
+    }
 
     @Override
     public String toString(){
-        if(getType2() == null){
+        if(getType2().getTypeName().isEmpty()){
             return String.format("""
                 Name:       %s
                 Types:      %s
@@ -107,12 +122,11 @@ public class Pokemon {
                 Experience: %d
                 Exp to lvl: %d
                 """,
-                    name,
-                    getType1().getTypeName(),
-                    level,
-                    experience,
-                    experienceCurve.getTotalExpToNextLvl()-experience
-            );
+                name,
+                getType1().getTypeName(),
+                level,
+                experience,
+                experienceCurve.getTotalExpToNextLvl()-experience);
         }
 
         return String.format("""
@@ -126,7 +140,6 @@ public class Pokemon {
                 String.format("%s %s", getType1().getTypeName(), getType2().getTypeName()),
                 level,
                 experience,
-                experienceCurve.getTotalExpToNextLvl()-experience
-                );
+                experienceCurve.getTotalExpToNextLvl()-experience);
     }
 }

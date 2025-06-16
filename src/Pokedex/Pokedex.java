@@ -29,10 +29,12 @@ public class Pokedex {
         int lineCounter = 1;
 
         try(Scanner reader = new Scanner(csvFile)){
+            //skip the header
             reader.nextLine();
+
             while(reader.hasNextLine()){
                 lineCounter++;
-                Pokemon pokemon = Pokemon.fromString(reader.nextLine());
+                Pokemon pokemon = Pokemon.fromStringToPokedex(reader.nextLine());
                 pokedex.add(pokemon);
             }
         }catch (FileNotFoundException e){
