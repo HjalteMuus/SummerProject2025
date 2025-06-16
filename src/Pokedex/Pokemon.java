@@ -64,14 +64,12 @@ public class Pokemon {
         if(experienceUp < 1 || level == MAX_LEVEL){
             return;
         }
-
         experience += experienceUp;
 
         while(true){
             if(experience < experienceCurve.getTotalExpToNextLvl() || level == MAX_LEVEL) break;
             levelUp();
         }
-
     }
 
     public ExperienceCurve getExperienceCurve(){
