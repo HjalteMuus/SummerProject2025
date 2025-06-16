@@ -28,8 +28,8 @@ public enum ExperienceCurve {
         }else if(e == NORMAL){
             totalExpToNextLvl = (int)(Math.pow(lvl,3)-Math.pow(lvl-1,3));
         }else{
-            totalExpToNextLvl = (int)(((4*Math.pow(lvl,3))/5)-((4*Math.pow(lvl-1,3))/5));
+            totalExpToNextLvl = (int)(Math.pow(lvl,3)*0.8-Math.pow(lvl-1,3)*0.8);
         }
-        if(totalExpToNextLvl == 0) totalExpToNextLvl = 1;
+        if(totalExpToNextLvl == 0) totalExpToNextLvl = 7;
     }
 }
